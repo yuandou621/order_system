@@ -204,4 +204,22 @@ public class OrderDao {
         order.setDishes(dishes);
         return order;
     }
+
+    public void changeState(int orderId, int isDone) throws OrderSystemException {
+        Connection connection = DBUtil.getConnection();
+        PreparedStatement statment = null;
+        try {
+            statment = connection.prepareStatement("update order_user set isDone = ? where orderId = ?");
+            statment.setInt(1,isDone);
+            statment.setInt(2,orderId);
+            int ret = statment.executeUpdate();
+            if(ret != 1){
+                throw new OrderSystemException("修改订单状态失败");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBUtil.Close(connection,statment,null);
+        }
+    }
 }
