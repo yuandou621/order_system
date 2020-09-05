@@ -52,8 +52,9 @@ public class RegisterServlet extends HttpServlet {
             user.setName(request.name);
             user.setPassword(request.password);
             user.setIsAdmin(0);
-
             userDao.add(user);
+            response.ok = 1;
+            response.reason = "";
         } catch (OrderSystemException e){
             response.ok = 0;
             response.reason = e.getMessage();
