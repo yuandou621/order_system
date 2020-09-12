@@ -12,24 +12,7 @@ var app = new Vue({
         },
         // 当前的菜品列表
         dishes: [
-            // {
-            //     dishId: 1,
-            //     name: '京酱肉丝',
-            //     price: 2000,
-            //     isSelected: null,
-            // },
-            // {
-            //     dishId: 2,
-            //     name: '宫保鸡丁',
-            //     price: 1800,
-            //     isSelected: null,
-            // },
-            // {
-            //     dishId: 3,
-            //     name: '红烧肉',
-            //     price: 2500,
-            //     isSelected: null,
-            // },
+
         ],
     },
     methods: {
@@ -105,7 +88,19 @@ var app = new Vue({
             })
         },
         logout() {
-            alert("注销功能还未实现嗷! 少年我看你骨骼清奇, 是编程奇才, 要不自己试试?");
+            console.log("logout");
+            $.ajax({
+                type:'get',
+                url:'logout',
+                success: function (data, status) {
+                    if (data.ok != 1) {
+                        alert("注销失败!");
+                        return;
+                    }
+                    alert("注销成功!");
+                    window.location.href = "login.html";
+                }
+            })
         }
     }
 });

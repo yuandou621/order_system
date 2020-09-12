@@ -69,7 +69,19 @@ var app = new Vue({
             return total;
         },
         logout() {
-            alert("注销功能还未实现嗷! 少年我看你骨骼清奇, 是编程奇才, 要不自己试试?");
+            console.log("logout");
+            $.ajax({
+                type:'get',
+                url:'logout',
+                success: function (data, status) {
+                    if (data.ok != 1) {
+                        alert("注销失败!");
+                        return;
+                    }
+                    alert("注销成功!");
+                    window.location.href = "login.html";
+                }
+            })
         }
     },
     computed: {
